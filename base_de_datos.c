@@ -1,10 +1,23 @@
+/*
+
+Aqui se desarrollan las funciones para manejar la base de datos.
+
+BASE DE DATOS en formato:  ".CSV"
+
+
+*/
+
+
+// Liberias Utilizadas
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "base_de_datos.h"
 
 
-void verificar_o_crear_archivo(const char *filename) {
+
+// Funcion para verificar la existencia del archivo  o crearlo en caso de no existir
+void verificar_o_crear_archivo(const char *filename) // se apunta a una cadena de caracteres que representa el nombre del archivo
     FILE *file = fopen(filename, "a");
     if (file == NULL) {
         perror("Error al crear el archivo");
@@ -13,11 +26,14 @@ void verificar_o_crear_archivo(const char *filename) {
     fclose(file);
 }
 
-void mostrar_contenido(const char *filename) {
-    verificar_o_crear_archivo(filename);
 
-    FILE *file = fopen(filename, "r");
-    if (file == NULL) {
+
+// Funcion para mostrar el contenido del archivo
+void mostrar_contenido(const char *filename) {
+    verificar_o_crear_archivo(filename);	 // verificacion o creacion del archivo 
+
+    FILE *file = fopen(filename, "r"); 		 // se abre el archivo el modo lectura 'r' {read} 
+    if (file == NULL) {						 // si el archivo no se encuentra...
         perror("Error al abrir el archivo");
         exit(EXIT_FAILURE);
     }
@@ -32,6 +48,9 @@ void mostrar_contenido(const char *filename) {
     fclose(file);
 }
 
+
+
+// Funcion para agregar contenido al archivo
 void agregar_fila(const char *filename) {
     verificar_o_crear_archivo(filename);
 
@@ -53,6 +72,9 @@ void agregar_fila(const char *filename) {
     printf("Operacion realizada exitosamente\n");
 }
 
+
+
+// Funcion para eliminar contenido del archivo
 void eliminar_fila(const char *filename, int fila_a_eliminar) {
     verificar_o_crear_archivo(filename);
 
